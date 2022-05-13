@@ -22,17 +22,19 @@ export class DokkuAPIProvider implements IDokkuProvider {
   }
 
   async createApp({ name }: ICreateApp): Promise<IApp> {
-    const { data } = await this.client
-      .post<IApp>('/apps', { name })
-      .catch(() => null);
+    const { data } = await this.client.post<IApp>('/apps', { name });
 
     return data;
   }
 
   async getApp(name: string): Promise<IApp> {
-    const { data } = await this.client.get<IApp>(`/apps/${name}`);
+    try {
+      const { data } = await this.client.get<IApp>(`/apps/${name}`);
 
-    return data;
+      return data;
+    } catch (e) {
+      return null;
+    }
   }
 
   async syncAppWithGit({ git_url, app_name }: ISyncAppWithGit): Promise<void> {
