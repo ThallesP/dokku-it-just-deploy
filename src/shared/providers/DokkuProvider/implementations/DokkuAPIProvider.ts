@@ -22,7 +22,9 @@ export class DokkuAPIProvider implements IDokkuProvider {
   }
 
   async createApp({ name }: ICreateApp): Promise<IApp> {
-    const { data } = await this.client.post<IApp>('/apps', { name });
+    const { data } = await this.client
+      .post<IApp>('/apps', { name })
+      .catch(() => null);
 
     return data;
   }
