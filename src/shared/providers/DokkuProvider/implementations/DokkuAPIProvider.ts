@@ -37,7 +37,11 @@ export class DokkuAPIProvider implements IDokkuProvider {
     }
   }
 
-  async syncAppWithGit({ git_url, app_name }: ISyncAppWithGit): Promise<void> {
-    await this.client.put(`/apps/${app_name}/git`, { git_url });
+  async syncAppWithGit({
+    git_url,
+    app_name,
+    ref,
+  }: ISyncAppWithGit): Promise<void> {
+    await this.client.put(`/apps/${app_name}/git`, { git_url, ref });
   }
 }

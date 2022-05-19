@@ -6,7 +6,7 @@ import { INewCommitDTO } from '../../dtos/INewCommitDTO';
 export class NewCommitUseCase {
   constructor(@Inject(IDokkuProvider) private dokkuProvider: IDokkuProvider) {}
 
-  async execute({ head_commit, repository }: INewCommitDTO) {
+  async execute({ head_commit, repository, ref }: INewCommitDTO) {
     const { added } = head_commit;
 
     const appExists = await this.dokkuProvider.getApp(repository.name);
@@ -22,6 +22,7 @@ export class NewCommitUseCase {
     await this.dokkuProvider.syncAppWithGit({
       git_url: repository.html_url,
       app_name: repository.name,
+      ref,
     });
   }
 }

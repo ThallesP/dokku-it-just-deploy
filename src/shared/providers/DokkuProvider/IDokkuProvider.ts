@@ -9,6 +9,7 @@ export interface IApp {
 export interface ISyncAppWithGit {
   git_url: string;
   app_name: string;
+  ref: string;
 }
 
 export interface IDokkuProvider {

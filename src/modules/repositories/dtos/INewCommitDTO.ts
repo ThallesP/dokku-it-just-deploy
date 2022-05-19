@@ -1,4 +1,5 @@
 export interface INewCommitDTO {
+  ref: string;
   head_commit: {
     added: string[];
   };
